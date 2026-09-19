@@ -3,11 +3,12 @@ services:
     build: .
     restart: always
     ports:
-      - "8000:8000"
+      - "8083:8000"
     environment:
+      - SECRET_KEY=adminsudahbisanihwak
       - UPLOAD_FOLDER=/var/uploads
-      - DATABASE_URL=mysql+pymysql://ctfd:ctfd@db/ctfd
-      - REDIS_URL=redis://cache:6379
+      - DATABASE_URL=mysql+pymysql://root:ctfd@db/ctfd
+      - REDIS_URL=redis://default:BIy1N6wuHNE6id2Y71JM7haiyQTLE0P6@redis-10521.c295.ap-southeast-1-1.ec2.cloud.redislabs.com:10521
       - WORKERS=1
       - LOG_FOLDER=/var/log/CTFd
       - ACCESS_LOG=-
@@ -43,7 +44,7 @@ services:
     volumes:
       - ./conf/nginx/http.conf:/etc/nginx/nginx.conf
     ports:
-      - 80:80
+      - 8083:8000
     depends_on:
       - ctfd
 
